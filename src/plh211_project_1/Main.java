@@ -8,8 +8,6 @@ import java.io.ByteArrayOutputStream;
 public class Main {
 	
 	static final String file_name = "my_file";
-	static final int DataPageSize = 512; //My page size is 512 bytes
-
 
 
 	public static void main(String[] args) throws IOException {
@@ -17,8 +15,10 @@ public class Main {
 		FileManager file = new FileManager();
 		
 		file.CreateFile(file_name);
+		//file.OpenFile(file_name);
 		file.FillFile(file_name);
-		file.FileHandle(file_name);
+		file.PrintFile(file_name);
+		file.CloseFile(file_name);
 		
 		
 		
