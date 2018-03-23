@@ -1,28 +1,29 @@
 package plh211_project_1;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public class FileHandle {
 		
-	private int position; //starting position
-	private int numOfPages; //starting numofPages
-	private int dataType; //Integer
+	private int position, numOfPages, dataType;
 	private String file_name;
-
-
-	RandomAccessFile myFile; //My File
+	private RandomAccessFile myFile; //My File
 	
 
-	public FileHandle(int position, int numOfPages, int dataType, String file_name) throws FileNotFoundException {
+	public FileHandle(int position, int numOfPages, int dataType, String file_name) throws IOException {
 		this.position = position;
 		this.numOfPages = numOfPages;
 		this.dataType = dataType;
 		this.file_name = file_name;
-		this.myFile = new RandomAccessFile("my_file","rw");
+		this.myFile = new RandomAccessFile(file_name,"rw");
+	}
+	
+	//Second constructor that uses only file name and permissions
+	public FileHandle(String file_name, String rw) throws IOException {
+		this.myFile = new RandomAccessFile(file_name,rw);
+		this.position = this.myFile.readInt();
+		this.numOfPages = this.myFile.readInt();
+		this.dataType = this.myFile.readInt();
 	}
 
 	
@@ -31,11 +32,6 @@ public class FileHandle {
 		System.out.println("\nPage Position = " + position);
 		System.out.println("\nNumber of Pages = " + numOfPages);
 		System.out.println("\nData Type Value = " + dataType);
-	}
-	
-	public int increaseNumOfPages(){
-		this.numOfPages++;
-		return numOfPages;
 	}
 	
 	public RandomAccessFile getFile() {
