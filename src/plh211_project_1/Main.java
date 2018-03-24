@@ -1,46 +1,47 @@
 package plh211_project_1;
 
-import java.io.*;
-import java.io.OutputStream;
 import java.util.Random;
 import java.io.IOException;
-import java.io.ByteArrayOutputStream;
 
 public class Main {
 	
-	static final String file_name = "my_file";
-	static int numOfSearches=10000;
-	static int total_cost=0;
-
+	static int dataPageSize = 512;
+	static int N = 100000;
+	static int totalFilePages = N/dataPageSize*4;
 
 	public static void main(String[] args) throws IOException {
+		String file_name = "my_file.bin";
 		
 		FileManager file = new FileManager(512);
-		FileSearch search = new FileSearch();
 		
-		//file.CreateFile(file_name);
-		file.OpenFile(file_name);
-		//file.FillFile(file_name);
-		//file.PrintFile();
-		//file.ReadBlock(512);
-		//file.CloseFile(file_name);		
-		//search
-		//file.OpenFile(file_name);
-		Random rand = new Random();
-		int random,i=0;
-		
-		do {
-			//System.out.println("\nsearching page" +i);
-			random = rand.nextInt(file.getMax() - file.getMin() + 1) + file.getMin();
-			total_cost = total_cost + search.SerialSearch(random);
-			i++;
-		}while (i<=numOfSearches);
-		
-		
-		
-		//total_cost = total_cost / numOfSearches;
-		System.out.println("\ncost=" +total_cost);		
+		//Create File that has 10^7 Numbers with random values from 1 to 10^7
+		file.CreateRandomFile(file_name);
 		file.CloseFile(file_name);
+		
+		//Print File - Requires to uncomment the printbuffer from ReadBlock and ReadNextBlock at FileManager
+		file.OpenFile(file_name);
+		file.PrintFile();
+		file.CloseFile(file_name);
+		
+		//Print the 1st Page only (Has 3 Values - Position / Number of Pages / Integer Value in bits
+		file.OpenFile(file_name);
+		file.ReadBlock(0);
+		file.CloseFile(file_name);
+		
+		//Serial Search 10000 random keys
+		file.OpenFile(file_name);
+		int cost = 0,SearchKey, nKeys = 1000 ;
+		FileSearch search = new FileSearch();
+		Random random = new Random();
+		
+		for(int i=0;i<nKeys;i++) {			
+			SearchKey = random.nextInt(N);			
+			cost += search.SerialSearch(file, SearchKey);			
+		}
+		file.CloseFile(file_name);		
+		System.out.println("Average disk accesses for the serial search method : "+ cost/nKeys);
+		System.out.println("Number of pages: "+file.getFileHandler().getNumOfPages());
+		
 		
 				
 		

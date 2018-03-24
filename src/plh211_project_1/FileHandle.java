@@ -25,17 +25,17 @@ public class FileHandle {
 		this.numOfPages = this.myFile.readInt();
 		this.dataType = this.myFile.readInt();
 	}
-
 	
-	public void printFileHandle(String file_name) throws IOException {
-		System.out.println("\nFile Name =" + file_name);
-		System.out.println("\nPage Position = " + position);
-		System.out.println("\nNumber of Pages = " + numOfPages);
-		System.out.println("\nData Type Value = " + dataType);
+	public void increaseNumOfPages() {
+		this.numOfPages++;
 	}
 	
 	public RandomAccessFile getFile() {
 		return myFile;
+	}
+	
+	public void setFile(RandomAccessFile myFile) {
+		this.myFile = myFile;
 	}
 	
 	public int getPosition() {
@@ -43,7 +43,8 @@ public class FileHandle {
 	}
 
 
-	public void setPosition(int position) {
+	public void setPosition(int position) throws IOException {
+		this.myFile.seek(position);
 		this.position = position;
 	}
 
@@ -75,17 +76,5 @@ public class FileHandle {
 
 	public void setFile_name(String file_name) {
 		this.file_name = file_name;
-	}
-
-
-	public RandomAccessFile getMyFile() {
-		return myFile;
-	}
-
-
-	public void setMyFile(RandomAccessFile myFile) {
-		this.myFile = myFile;
-	}
-
-	
+	}	
 }
