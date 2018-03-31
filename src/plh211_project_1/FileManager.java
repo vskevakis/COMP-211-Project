@@ -66,7 +66,7 @@ public class FileManager {
 			fileHandle.setPosition(position); //finding the page
 			fileHandle.getFile().read(this.buffer);
 			
-			//printBuffer(this.buffer); //Printing the Block
+		//	printBuffer(this.buffer); //Printing the Block
 		} catch (IOException e) {
 			return 0;
 		}	
@@ -78,7 +78,7 @@ public class FileManager {
 		try {
 			fileHandle.getFile().read(this.buffer);
 			
-			//printBuffer(this.buffer);			
+		//	printBuffer(this.buffer);			
 		} catch (IOException e) {
 			return 0;
 		}		
@@ -175,7 +175,7 @@ public class FileManager {
 	}
 	
 	public void CreateRandomFile(String file_name) throws IOException {
-		System.out.println("Creating File...");
+		System.out.println("...Creating File...");
 		CreateFile(file_name);
 		OpenFile(file_name);
 		
@@ -194,10 +194,11 @@ public class FileManager {
 			AppendBlock(file_name,buf);
 			bos.reset();
 		}
-		System.out.println("File Created");
+		System.out.println("...File Created...");
 		
 		out.close();
-		bos.close();		
+		bos.close();
+		CloseFile(file_name);
 	}
 	
 	public void PrintFile() throws IOException{

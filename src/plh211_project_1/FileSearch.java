@@ -7,7 +7,6 @@ public class FileSearch {
 	
 	
 	public int SerialSearch(FileManager file, int key) throws IOException {		
-		System.out.println("Searching for Key : "+key);		
 		this.cost = 0;		
 		boolean flag = false;		
 		int[] IntArray;
@@ -21,7 +20,6 @@ public class FileSearch {
 			
 			for(int i=0;i<IntArray.length;i++) {				
 				if(IntArray[i] == key) {					
-					System.out.println("Key Found in Page : "+k);
 					flag = true;
 					break;
 				}
