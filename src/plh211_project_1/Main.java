@@ -32,11 +32,11 @@ public class Main {
 		System.out.println("Average Serial Search cost : "+avgSerialSearchCost );
 		
 		// Number of Keys | FileManager | Buffer Size(K)
-		double avgBufferSearch1K = BufferSearchDemo(N,dataPageSize,numSearches,file,50);
+		double avgBufferSearch1K = BufferSearchDemo(N,dataPageSize,numSearches,file,1000);
 		
 		System.out.println("Average Buffer Pool Search cost (K=1.000) : "+avgBufferSearch1K+ " an "+((avgSerialSearchCost - avgBufferSearch1K) / avgSerialSearchCost * 100)+"% decrease in cost");
 		
-		double avgBufferSearch10K = BufferSearchDemo(N,dataPageSize,numSearches,file,70);
+		double avgBufferSearch10K = BufferSearchDemo(N,dataPageSize,numSearches,file,10000);
 		
 		System.out.println("Average Buffer Pool Search cost (K=10.000) : "+avgBufferSearch10K+ " an "+((avgSerialSearchCost - avgBufferSearch10K) / avgSerialSearchCost * 100)+"% decrease in cost");
 		

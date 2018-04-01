@@ -3,10 +3,11 @@ package plh211_project_1;
 import java.io.IOException;
 
 public class FileSearch {
-	private int cost, pages;
+	private int pages;
+	private double cost;
 	
 	
-	public int SerialSearch(FileManager file, int key) throws IOException {		
+	public double SerialSearch(FileManager file, int key) throws IOException {		
 		this.cost = 0;		
 		boolean flag = false;		
 		int[] IntArray;
